@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -14,8 +14,9 @@ import {useSelector} from 'react-redux';
 
 const History = () => {
   const {transactionReducers} = useSelector(state => ({
-    transactionReducers: state.transactionReducers,
+    transactionReducers: state.transactionReducers.transactions,
   }));
+
   console.log(transactionReducers);
 
   return (
@@ -31,43 +32,18 @@ const History = () => {
         </Text>
         <View style={{borderBottomColor: 'black', borderBottomWidth: 1}}></View>
         <ScrollView style={styles.transBox}>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-            <Text style={styles.itemText}>50 Rs</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.transItem}>
-            <Text style={styles.itemText}>Transaction 1</Text>
-          </TouchableOpacity>
+          {transactionReducers.length > 0 ? (
+            transactionReducers.map(item => {
+              return (
+                <TouchableOpacity style={styles.transItem}>
+                  <Text style={styles.itemText}>{item.detail}</Text>
+                  <Text style={styles.itemText}>{item.amount}</Text>
+                </TouchableOpacity>
+              );
+            })
+          ) : (
+            <Text>No Transactions found</Text>
+          )}
         </ScrollView>
       </View>
     </View>
