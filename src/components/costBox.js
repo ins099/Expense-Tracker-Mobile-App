@@ -4,15 +4,25 @@ import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
+import {useSelector} from 'react-redux';
 
 const CostBox = () => {
+  const totalIncome = useSelector(state => {
+    const {transactions} = state.transactionReducers;
+    let totalIncome = 0;
+    transactions.map(item => {
+      totalIncome += parseInt(item.amount);
+    });
+    return totalIncome;
+  });
+
   return (
     <View style={{paddingTop: 20, paddingLeft: 30}}>
       <View style={styles.container}>
         <View style={styles.box}>
           <View>
             <Text style={styles.incText}>INCOME</Text>
-            <Text style={styles.num}>0 Rs</Text>
+            <Text style={styles.num}>{totalIncome} Rs</Text>
           </View>
         </View>
         <View style={styles.box}>
