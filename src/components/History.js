@@ -10,8 +10,14 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+import {useSelector} from 'react-redux';
 
 const History = () => {
+  const {transactionReducers} = useSelector(state => ({
+    transactionReducers: state.transactionReducers,
+  }));
+  console.log(transactionReducers);
+
   return (
     <View>
       <View>

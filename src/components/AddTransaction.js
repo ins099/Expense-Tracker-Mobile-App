@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Alert,
   StyleSheet,
@@ -16,6 +16,9 @@ import {addIncome} from '../redux/actions';
 import {INCOME} from '../redux/actionTypes';
 
 const AddTransaction = () => {
+  const [detail, setDetail] = useState('');
+  const [amount, setAmount] = useState(0);
+
   const dispatch = useDispatch();
 
   return (
@@ -26,8 +29,14 @@ const AddTransaction = () => {
       <View style={{borderBottomColor: 'black', borderBottomWidth: 1}}></View>
 
       <View>
-        <TextInput placeholder="Transaction Detail" type="text"></TextInput>
-        <TextInput placeholder="Amount" type="number"></TextInput>
+        <TextInput
+          placeholder="Transaction Detail"
+          onChangeText={detail => setDetail(detail)}
+          value={detail}></TextInput>
+        <TextInput
+          placeholder="Amount"
+          onChangeText={amount => setAmount(amount)}
+          value={amount}></TextInput>
         <View
           style={{
             display: 'flex',
@@ -36,10 +45,11 @@ const AddTransaction = () => {
           }}>
           <TouchableOpacity
             style={styles.btn}
-            onPress={dispatch({
-              type: INCOME,
-              payload: {detail: 'helooo', amount: 100},
-            })}>
+            onPress={() => {
+              setDetail('');
+              setAmount(0);
+              dispatch(addIncome({detail: detail, amount: amount}));
+            }}>
             <Text style={styles.btnTxt}>Income</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.expBtn}>

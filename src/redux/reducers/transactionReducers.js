@@ -1,14 +1,15 @@
 import {INCOME, EXPENSE} from '../actionTypes';
 
-const initialState = {
-  detail: '',
-  amount: null,
-};
+const initialState = [];
 
 const transactionReducers = (state = initialState, action) => {
   switch (action.type) {
     case INCOME:
-      console.log(action.payload);
+      return {
+        ...state,
+        detail: action.payload.detail,
+        amount: action.payload.amount,
+      };
     case EXPENSE:
     default:
       return state;
