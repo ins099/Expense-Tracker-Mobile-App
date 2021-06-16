@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-const Balance = () => {
+const Balance = ({balance}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.bal}>Your Balance</Text>
-      <Text style={styles.amnt}>0.00 Rs</Text>
+      <Text style={styles.amnt}>{balance} Rs</Text>
     </View>
   );
 };

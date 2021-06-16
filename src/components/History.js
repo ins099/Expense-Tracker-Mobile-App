@@ -13,29 +13,36 @@ import {
 import {useSelector} from 'react-redux';
 
 const History = () => {
-  const {transactionReducers} = useSelector(state => ({
-    transactionReducers: state.transactionReducers.transactions,
-  }));
-
-  console.log(transactionReducers);
+  const {transactionReducers, expenseTransactionReducers} = useSelector(
+    state => ({
+      transactionReducers: state.transactionReducers.transactions,
+      expenseTransactionReducers: state.expenseTransactionReducers.transactions,
+    }),
+  );
 
   return (
     <View>
       <View>
-        <Text
-          style={{
-            fontSize: 20,
-            padding: 20,
-            paddingBottom: 0,
-          }}>
+        <Text style={{fontSize: 20, padding: 20, paddingBottom: 0}}>
           History
         </Text>
         <View style={{borderBottomColor: 'black', borderBottomWidth: 1}}></View>
         <ScrollView style={styles.transBox}>
-          {transactionReducers.length > 0 ? (
-            transactionReducers.map(item => {
+          {expenseTransactionReducers.map((item, key) => {
+            return (
+              <TouchableOpacity style={styles.transItem} key={key}>
+                <Text style={styles.itemText}>{item.detail}</Text>
+                <Text style={styles.itemText}>{item.amount}</Text>
+              </TouchableOpacity>
+            );
+          })}
+          {transactionReducers.length ||
+          expenseTransactionReducers.length > 0 ? (
+            transactionReducers.map((item, key) => {
               return (
-                <TouchableOpacity style={styles.transItem}>
+                <TouchableOpacity
+                  key={key}
+                  style={[styles.transItem, {borderColor: 'green'}]}>
                   <Text style={styles.itemText}>{item.detail}</Text>
                   <Text style={styles.itemText}>{item.amount}</Text>
                 </TouchableOpacity>

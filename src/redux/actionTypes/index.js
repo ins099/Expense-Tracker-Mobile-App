@@ -1,2 +1,2 @@
-export const INCOME = 'INCOME';
-export const EXPENSE = 'EXPENSE';
+export const ADDINCOME = 'ADDINCOME';
+export const ADDEXPENSE = 'ADDEXPENSE';

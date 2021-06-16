@@ -1,18 +1,14 @@
-import {INCOME, EXPENSE} from '../actionTypes';
+import {ADDEXPENSE, ADDINCOME} from '../actionTypes';
 
 export const addIncome = payload => {
   return {
-    type: INCOME,
-    payload: {
-      detail: payload.detail,
-      amount: payload.amount,
-    },
+    type: ADDINCOME,
+    payload,
   };
 };
 export const addExpense = payload => {
   return {
-    type: INCOME,
-    detail: payload.detail,
-    amount: payload.amount,
+    type: ADDEXPENSE,
+    payload,
   };
 };
