@@ -9,7 +9,6 @@ const Home = () => {
   return (
     <View>
       <Header />
-      <Balance />
       <CostBox />
       <History />
       <AddTransaction />

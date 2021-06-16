@@ -5,6 +5,7 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import {useSelector} from 'react-redux';
+import Balance from './balance';
 
 const CostBox = () => {
   const totalIncome = useSelector(state => {
@@ -16,23 +17,35 @@ const CostBox = () => {
     return totalIncome;
   });
 
+  const totalExpense = useSelector(state => {
+    const {transactions} = state.expenseTransactionReducers;
+    let totalExpense = 0;
+    transactions.map(item => {
+      totalExpense += parseInt(item.amount);
+    });
+    return totalExpense;
+  });
+
   return (
-    <View style={{paddingTop: 20, paddingLeft: 30}}>
-      <View style={styles.container}>
-        <View style={styles.box}>
-          <View>
-            <Text style={styles.incText}>INCOME</Text>
-            <Text style={styles.num}>{totalIncome} Rs</Text>
+    <>
+      <Balance balance={totalIncome - totalExpense} />
+      <View style={{paddingTop: 20, paddingLeft: 30}}>
+        <View style={styles.container}>
+          <View style={styles.box}>
+            <View>
+              <Text style={styles.incText}>INCOME</Text>
+              <Text style={styles.num}>{totalIncome} Rs</Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.box}>
-          <View>
-            <Text style={styles.expText}>Expense</Text>
-            <Text style={styles.num}>0 Rs</Text>
+          <View style={styles.box}>
+            <View>
+              <Text style={styles.expText}>Expense</Text>
+              <Text style={styles.num}>{totalExpense} Rs</Text>
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </>
   );
 };
 

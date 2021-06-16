@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -12,8 +11,8 @@ import {
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 import {useDispatch} from 'react-redux';
-import {addIncome} from '../redux/actions';
-import {INCOME} from '../redux/actionTypes';
+import {addExpense, addIncome} from '../redux/actions';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 
 const AddTransaction = () => {
   const [detail, setDetail] = useState('');
@@ -29,14 +28,16 @@ const AddTransaction = () => {
       <View style={{borderBottomColor: 'black', borderBottomWidth: 1}}></View>
 
       <View>
-        <TextInput
-          placeholder="Transaction Detail"
-          onChangeText={detail => setDetail(detail)}
-          value={detail}></TextInput>
-        <TextInput
-          placeholder="Amount"
-          onChangeText={amount => setAmount(amount)}
-          value={amount}></TextInput>
+        <KeyboardAwareScrollView>
+          <TextInput
+            placeholder="Transaction Detail"
+            onChangeText={detail => setDetail(detail)}
+            value={detail}></TextInput>
+          <TextInput
+            placeholder="Amount"
+            onChangeText={amount => setAmount(amount)}
+            value={amount}></TextInput>
+        </KeyboardAwareScrollView>
         <View
           style={{
             display: 'flex',
@@ -52,7 +53,13 @@ const AddTransaction = () => {
             }}>
             <Text style={styles.btnTxt}>Income</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.expBtn}>
+          <TouchableOpacity
+            style={styles.expBtn}
+            onPress={() => {
+              setDetail('');
+              setAmount(0);
+              dispatch(addExpense({detail: detail, amount: amount}));
+            }}>
             <Text style={styles.btnTxt}>Expense</Text>
           </TouchableOpacity>
         </View>

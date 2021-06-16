@@ -5,13 +5,14 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "node api.js && react-native start",
     "test": "jest",
     "lint": "eslint ."
   },
   "dependencies": {
     "react": "17.0.1",
     "react-native": "0.64.2",
+    "react-native-keyboard-aware-scrollview": "^2.1.0",
     "react-native-responsive-screen": "^1.4.2",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0"
