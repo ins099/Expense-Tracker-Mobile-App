@@ -1,16 +1,14 @@
-import {ADDINCOME} from '../actionTypes';
+import {ADDEXPENSE} from '../actionTypes';
 
 const initialState = {transactions: []};
 
-const transactionReducers = (state = initialState, {type, payload}) => {
+const expenseTransactionReducers = (state = initialState, {type, payload}) => {
   switch (type) {
-    case ADDINCOME:
-      let id = state.transactions.length + 1;
+    case ADDEXPENSE:
       return {
         transactions: [
           ...state.transactions,
           {
-            id,
             detail: payload.detail,
             amount: payload.amount,
           },
@@ -21,4 +19,4 @@ const transactionReducers = (state = initialState, {type, payload}) => {
   }
 };
 
-export default transactionReducers;
+export default expenseTransactionReducers;
